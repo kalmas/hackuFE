@@ -7,56 +7,11 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
         <title>ForRent.com</title>
         <link rel="stylesheet" href="https://s3.amazonaws.com/codiqa-cdn/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
-        <link rel="stylesheet" href="my.css" />
-        <link rel="icon" href="http://images.forrent.com/sites/frcMobile/design/favicon.ico" type="image/x-icon"/>
-        <style type="text/css">
-	      	html { height: 100% }
-	      	body { height: 100%; 
-		           margin: 0; 
-				   padding: 0;
-	      		   overflow: hidden;
-		  	}
-		  	
-			/*make the page element 100% height*/
-			#map-page {
-			       height : 100%;
-			       width : 100% ;
-			}
-
-			/*set the content to be full-width and height except it doesn't overlap the header or footer*/
-			#map-page .ui-content {
-			       position : absolute;
-			       top      : 40px;
-			       right    : 0;
-			       bottom   : 30px;
-			       left     : 0;
-			}		  
-	    </style>
+        <link rel="stylesheet" href="map.css" />
         <script src="https://s3.amazonaws.com/codiqa-cdn/jquery-1.7.2.min.js"></script>
         <script src="https://s3.amazonaws.com/codiqa-cdn/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?&sensor=false"></script>
-
-        <script type="text/javascript">
-		function initializeMap() {
-			var mapOptions = {
-		    	center: new google.maps.LatLng(36.88, -76.25),
-		    	zoom: 8,
-		    	mapTypeId: google.maps.MapTypeId.ROADMAP
-		  	};
-        var map = new google.maps.Map(document.getElementById("map-canvas"),
-            mapOptions);
-         var marker = new google.maps.Marker({ position: new google.maps.LatLng(36.88, -76.25),
-             map:map
-         });
-		}
-		
-		//var geocoder = new google.maps.Geocoder();
-		
-		$('#map-page').live('pageshow',function(event){
-			initializeMap();
-		});
-      
-    	</script>
+        <script type="text/javascript" src="map.js"></script>
     </head>
     <body>
         <!-- Home -->
