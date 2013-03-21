@@ -39,24 +39,22 @@
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?&sensor=false"></script>
 
         <script type="text/javascript">
-		function initializeMap() {
+        function initializeMap() {
 			var mapOptions = {
 		    	center: new google.maps.LatLng(36.88, -76.25),
 		    	zoom: 8,
 		    	mapTypeId: google.maps.MapTypeId.ROADMAP
 		  	};
-        var map = new google.maps.Map(document.getElementById("map-canvas"),
-            mapOptions);
-         var marker = new google.maps.Marker({ position: new google.maps.LatLng(36.88, -76.25),
-             map:map
-         });
+			// Pop a map on the page
+        	map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+			
+			// Place a marker
+         	var marker = new google.maps.Marker({'position': new google.maps.LatLng(36.88, -76.25), 'map':map});
 		}
 		
 		//var geocoder = new google.maps.Geocoder();
 		
-		$('#map-page').live('pageshow',function(event){
-			initializeMap();
-		});
+		$('#map-page').live('pageshow', initializeMap);
       
     	</script>
     </head>
