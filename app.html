@@ -19,6 +19,7 @@
 			/*make the page element 100% height*/
 			#map-page {
 			    height : 100%;
+			    width : 100% ;
 			}
 
 			/*set the content to be full-width and height except it doesn't overlap the header or footer*/
@@ -45,6 +46,9 @@
         };
         var map = new google.maps.Map(document.getElementById("map-canvas"),
             mapOptions);
+         var marker = new google.maps.Marker({ position: new google.maps.LatLng(36.88, -76.25),
+             map:map
+         });
       }
       google.maps.event.addDomListener(window, 'load', initialize);
       
