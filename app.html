@@ -9,6 +9,7 @@
         </title>
         <link rel="stylesheet" href="https://s3.amazonaws.com/codiqa-cdn/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
         <link rel="stylesheet" href="my.css" />
+        <link rel="shortcut icon" href="http://images.forrent.com/sites/frcMobile/design/favicon.ico">
         <style type="text/css">
 	      	html { height: 100% }
 	      	body { height: 100%; 
@@ -37,25 +38,25 @@
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?&sensor=false"></script>
 
         <script type="text/javascript">
-      function initialize() {
-        var mapOptions = {
-          center: new google.maps.LatLng(36.88, -76.25),
-          zoom: 8,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        var map = new google.maps.Map(document.getElementById("map-canvas"),
+      		function initialize() {
+        	var mapOptions = {
+          		center: new google.maps.LatLng(36.88, -76.25),
+          		zoom: 8,
+          		mapTypeId: google.maps.MapTypeId.ROADMAP
+        	};
+        	var map = new google.maps.Map(document.getElementById("map-canvas"),
             mapOptions);
-      }
-      google.maps.event.addDomListener(window, 'load', initialize);
+      		}
+      		google.maps.event.addDomListener(window, 'load', initialize);
       
-    </script>
+    	</script>
     </head>
     <body>
         <!-- Home -->
         <div data-role="page" id="searchpage">
             <div id="Header" data-theme="b" data-role="header" data-position="fixed">
                 <h5>
-                    ForRent
+                    <a href="forRent.com"><img src="http://images.frmonline.com/sites/frcMobile/design/frc-logo-forrent-290x36.png" width="215" height="28"></a>
                 </h5>
                 <h1>
                     Map Search
