@@ -12,3 +12,8 @@ function initializeMap() {
 }
 
 $('#map-page').live('pageshow', initializeMap);
+
+$('sbutton').click(function (){
+				var sval = $('#searchfield').val();
+				getLatLong(sval);
+			});
