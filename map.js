@@ -1,4 +1,5 @@
-var map, markers=[], listings=[];
+var map, count, markers=[], listings=[];
+var infoWindow = new google.maps.InfoWindow;
 
 $(document).ready(function () {
 
@@ -38,17 +39,13 @@ $(document).ready(function () {
 						var result = results[idx];
 						var marker = new google.maps.Marker({'position': new google.maps.LatLng(result.latitude, result.longitude), 'map':map});
 						google.maps.event.addListener(marker, 'click', function () {
-							var idx = markers.indexOf(this), listing = listings[idx];
-							var infoWindow = new google.maps.InfoWindow({"position":new google.maps.LatLng(listing.latitude, listing.longitude), 
-							"content": "<img src=\"" + listing.images.url[0] + '" style="width:50px;height:50px;float:left;" /></br>' + listing.name + '</br>' + listing.phone});
-							infoWindow.open(map);
-							console.log();
+							var idx = markers.indexOf(this), listing = listings[idx];			
+							infoWindow.setOptions({"position": this.position, "content": "<img src=\"" + listing.images.url[0] + '" style="width:50px;height:50px;float:left;" /></br>' + listing.name + '</br>' + listing.phone}); 
+							infoWindow.open(map, this);
 						});
 						listings.push(result);
 						markers.push(marker);
 					}
-						
-					console.log(response);
 					console.log(markers.length);
 				   }
 				 });
