@@ -27,3 +27,13 @@ body { height: 100%;
 .logo{
 	max-width: 90%;
 }
+
+#textform{
+	float: left;
+	width: 100px;
+	top: 0;
+}
+#total{
+	width: 200px;
+	padding: 10px;
+}

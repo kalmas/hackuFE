@@ -36,11 +36,12 @@ $(document).ready(function () {
 					var results = response.results, listings = [], markers = [];
 					for(var idx in results){
 						var result = results[idx];
-						var marker = new google.maps.Marker({'position': new google.maps.LatLng(result.latitude, result.longitude), 'map':map});
+						var image = "http://maps.google.com/mapfiles/kml/pal2/icon61.png";
+						var marker = new google.maps.Marker({'position': new google.maps.LatLng(result.latitude, result.longitude), 'map':map, 'icon': image});
 						google.maps.event.addListener(marker, 'click', function () {
 							var idx = markers.indexOf(this), listing = listings[idx];
 							var infoWindow = new google.maps.InfoWindow({"position":new google.maps.LatLng(listing.latitude, listing.longitude), 
-							"content": "<img src=\"" + listing.images.url[0] + '" style="width:50px;height:50px;float:left;" /></br>' + listing.name + '</br>' + listing.phone});
+							"content": "<div id='total'><img src=\"" + listing.images.url[0] + '" style="width:50px;height:50px;float:left; margin: 0 10px 0 0;" /><div id="textform">' + listing.name + '<br>' + listing.phone + '<br><a href="#profile-page" align=" right;">More Details</a></div></div>'});
 							infoWindow.open(map);
 							console.log();
 						});
