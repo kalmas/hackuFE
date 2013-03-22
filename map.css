@@ -1,4 +1,4 @@
-/* Put your custom CSS here */
+/* Put your cus%om CSS here */
 page header{
 	text-align:center;
 }
@@ -18,8 +18,12 @@ body { height: 100%;
 /*set the content to be full-width and height except it doesn't overlap the header or footer*/
 #map-page .ui-content {
     position : absolute;
-    top      : 40px;
+    top      : 45px;
     right    : 0;
     bottom   : 30px;
     left     : 0;
+}
+
+.logo{
+	max-width: 90%;
 }

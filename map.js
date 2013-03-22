@@ -1,15 +1,16 @@
-var map;
+var map, markers=[], listings=[];
 
 $(document).ready(function () {
 
 	function initializeMap() {
 		var mapOptions = {
 			center: new google.maps.LatLng(36.88, -76.25),
-			zoom: 11,
+			zoom: 12,
 			mapTypeId: google.maps.MapTypeId.ROADMAP
 		};
 		// Pop a map on the page
 		map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+		google.maps.event.trigger(map, 'resize');
 	}
 
 
@@ -20,8 +21,8 @@ $(document).ready(function () {
 				var latlongObject = {};
 				latlongObject.lat = locate.geometry.location.lat();
 				latlongObject.lng = locate.geometry.location.lng();
+				google.maps.event.trigger(map, 'resize');
 				map.setCenter(new google.maps.LatLng(latlongObject.lat, latlongObject.lng));
-		
 				$.ajax({
 				   type: "GET",
 				   url: "http://atorres-hacku.dev/index.php",
@@ -32,25 +33,42 @@ $(document).ready(function () {
 					console.log('error');
 				   },
 				   success: function(response) {
-					var results = response.results;
+					var results = response.results, listings = [], markers = [];
 					for(var idx in results){
 						var result = results[idx];
-						console.log(result);
 						var marker = new google.maps.Marker({'position': new google.maps.LatLng(result.latitude, result.longitude), 'map':map});
+						google.maps.event.addListener(marker, 'click', function () {
+							var idx = markers.indexOf(this), listing = listings[idx];
+							var infoWindow = new google.maps.InfoWindow({"position":new google.maps.LatLng(listing.latitude, listing.longitude), 
+							"content": "<img src=\"" + listing.images.url[0] + '" style="width:50px;height:50px;float:left;" /></br>' + listing.name + '</br>' + listing.phone});
+							infoWindow.open(map);
+							console.log();
+						});
+						listings.push(result);
+						markers.push(marker);
 					}
 						
 					console.log(response);
+					console.log(markers.length);
 				   }
 				 });
 				 });	
 	}
 
-	$('#map-page').live('pageshow', initializeMap);
+	$('#map-page').live('pageinit', initializeMap);
 
-	$('#sbutton').click(function (){
-		if (map == null) initializeMap();
+	$('#sbutton').bind("click", function (){
 		var sval = $('#searchfield').val();
 		getLatLong(sval);
+		map.setZoom(12);
 	});
+	
+	$('#mapSearchBox').bind("click change", function (){
+		var sval = $(this).val();
+		getLatLong(sval);
+		map.setZoom(12);
+	});
+	
+	initializeMap();
 });
 
