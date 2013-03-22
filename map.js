@@ -1,8 +1,7 @@
 
 
 $(document).ready(function () {
-	var map, count, markers=[], listings=[];
-var infoWindow = new google.maps.InfoWindow;
+	var map, count, markers=[], listings=[], infoWindow = new google.maps.InfoWindow;
 
 	function initializeMap() {
 		var mapOptions = {
@@ -23,8 +22,7 @@ var infoWindow = new google.maps.InfoWindow;
 				var latlongObject = {};
 				latlongObject.lat = locate.geometry.location.lat();
 				latlongObject.lng = locate.geometry.location.lng();
-				google.maps.event.trigger(map, 'resize');
-				map.setCenter(new google.maps.LatLng(latlongObject.lat, latlongObject.lng));
+				
 				$.ajax({
 				   type: "GET",
 				   url: "http://204.154.41.98/hackuFE/index.php",
@@ -38,10 +36,10 @@ var infoWindow = new google.maps.InfoWindow;
 					for (var i = 0; i < markers.length; i++ ) {
 						markers[i].setMap(null);
 					}
-					var results = response.results, listings = [];
+					var results = response.results, listings = [], bounds = new google.maps.LatLngBounds();
 					for(var idx in results){
-						var result = results[idx];
-						var marker = new google.maps.Marker({'position': new google.maps.LatLng(result.latitude, result.longitude), 'map':map});
+						var result = results[idx], latlng = new google.maps.LatLng(result.latitude, result.longitude);
+						var marker = new google.maps.Marker({'position': latlng, 'map':map});
 						listings.push(result);
 						markers.push(marker);
 						google.maps.event.addListener(marker, 'click', function () {
@@ -49,9 +47,11 @@ var infoWindow = new google.maps.InfoWindow;
 							infoWindow.setOptions({"position": this.position, "content": "<img src=\"" + listing.images.url[0] + '" style="width:50px;height:50px;float:left;" /></br>' + listing.name + '</br>' + listing.phone}); 
 							infoWindow.open(map, this);
 						});
-						
+						bounds.extend(latlng);
 					}
-					console.log(markers.length);
+					
+					google.maps.event.trigger(map, 'resize');
+					map.fitBounds(bounds);
 				   }
 				 });
 				 });	
