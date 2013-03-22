@@ -23,7 +23,7 @@ $(document).ready(function () {
 				
 				$.ajax({
 				   type: "GET",
-				   url: "http://204.154.41.98/hackuFE/index.php",
+				   url: "http://204.154.41.98/hackuFE/search-by-latlong.php",
 				   data: latlongObject,
 				   cache: false,
 				   dataType: 'jsonp',
