@@ -21,8 +21,9 @@ $(document).ready(function () {
 				var latlongObject = {};
 				latlongObject.lat = locate.geometry.location.lat();
 				latlongObject.lng = locate.geometry.location.lng();
-				google.maps.event.trigger(map, 'resize');
-				map.setCenter(new google.maps.LatLng(latlongObject.lat, latlongObject.lng));
+				//google.maps.event.trigger(map, 'resize');
+				//map.setCenter(new google.maps.LatLng(latlongObject.lat, latlongObject.lng));
+				
 				$.ajax({
 				   type: "GET",
 				   url: "http://204.154.41.98/hackuFE/index.php",
@@ -33,23 +34,23 @@ $(document).ready(function () {
 					console.log('error');
 				   },
 				   success: function(response) {
-					var results = response.results, listings = [], markers = [];
+					var results = response.results, listings = [], markers = [], bounds = new google.maps.LatLngBounds();
 					for(var idx in results){
-						var result = results[idx];
-						var marker = new google.maps.Marker({'position': new google.maps.LatLng(result.latitude, result.longitude), 'map':map});
+						var result = results[idx], latlng = new google.maps.LatLng(result.latitude, result.longitude);
+						var marker = new google.maps.Marker({'position': latlng, 'map':map});
 						google.maps.event.addListener(marker, 'click', function () {
 							var idx = markers.indexOf(this), listing = listings[idx];
 							var infoWindow = new google.maps.InfoWindow({"position":new google.maps.LatLng(listing.latitude, listing.longitude), 
 							"content": "<img src=\"" + listing.images.url[0] + '" style="width:50px;height:50px;float:left;" /></br>' + listing.name + '</br>' + listing.phone});
 							infoWindow.open(map);
-							console.log();
 						});
+						bounds.extend(latlng);
 						listings.push(result);
 						markers.push(marker);
 					}
-						
-					console.log(response);
-					console.log(markers.length);
+					
+					map.fitBounds(bounds);
+					google.maps.event.trigger(map, 'resize');
 				   }
 				 });
 				 });	
