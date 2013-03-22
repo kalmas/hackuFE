@@ -211,6 +211,6 @@
 	}
 
 	header("content-type: application/json");
-	echo json_encode($response);
+	echo $_REQUEST['callback'] . "(" . json_encode($response) . ");";
 
 ?>
