@@ -1,6 +1,5 @@
-var map, markers=[], listings=[];
-
 $(document).ready(function () {
+	var map, count, markers=[], listings=[], infoWindow = new google.maps.InfoWindow;
 
 	function initializeMap() {
 		var mapOptions = {
@@ -66,7 +65,7 @@ $(document).ready(function () {
 				
 				$.ajax({
 				   type: "GET",
-				   url: "http://204.154.41.98/hackuFE/index.php",
+				   url: "http://204.154.41.98/hackuFE/search-by-latlong.php",
 				   data: {lat : locationLatLon.lat(), lon:locationLatLon.lng()},
 				   cache: false,
 				   dataType: 'jsonp',
