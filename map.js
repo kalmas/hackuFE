@@ -26,7 +26,7 @@ $(document).ready(function () {
 				map.setCenter(new google.maps.LatLng(latlongObject.lat, latlongObject.lng));
 				$.ajax({
 				   type: "GET",
-				   url: "http://atorres-hacku.dev/index.php",
+				   url: "http://204.154.41.98/hackuFE/index.php",
 				   data: latlongObject,
 				   cache: false,
 				   dataType: 'jsonp',
